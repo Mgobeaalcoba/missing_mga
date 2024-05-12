@@ -32,7 +32,7 @@ These methods provide comprehensive tools for analyzing and visualizing missing 
 To install the package, you can use pip:
 
 ```shell
-pip install pandas-missing
+pip install missing-mga
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ pip install pandas-missing
 To use the package, you need to import the MissingMethods class from the pandas_missing module:
 
 ```python
-from pandas_missing import MissingMethods
+from missing-mga import MissingMethods
 ```
 
 Then, you can create a DataFrame and use the missing method to access the missing value handling methods:

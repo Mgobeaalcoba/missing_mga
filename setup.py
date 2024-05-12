@@ -7,7 +7,7 @@ setup(
     name='missing_mga',
     version='0.2.0',
     packages=find_packages(),
-    install_requires=['pandas', 'numpy', 'matplotlib', 'seaborn', 'itertools', 'upsetplot'],
+    install_requires=['pandas', 'numpy', 'matplotlib', 'seaborn', 'upsetplot'],
     author='Mariano Gobea Alcoba',
     author_email='gobeamariano@gmail.com',
     description='A package for handling missing values in datasets.',

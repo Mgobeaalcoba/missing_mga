@@ -193,7 +193,7 @@ class MissingMethods:
             self._obj.missing.missing_variable_summary()
             .value_counts("n_missing")
             .reset_index()
-            .rename(columns={"n_missing": "n_missing_in_variable", 0: "n_variables"})
+            .rename(columns={"n_missing": "n_missing_in_variable", "count": "n_variables"})
             .assign(
                 pct_variables=lambda df: df.n_variables / df.n_variables.sum() * 100
             )
@@ -218,7 +218,7 @@ class MissingMethods:
             self._obj.missing.missing_case_summary()
             .value_counts("n_missing")
             .reset_index()
-            .rename(columns={"n_missing": "n_missing_in_case", 0: "n_cases"})
+            .rename(columns={"n_missing": "n_missing_in_case", "count": "n_cases"})
             .assign(pct_case=lambda df: df.n_cases / df.n_cases.sum() * 100)
             .sort_values("pct_case", ascending=False)
         )
@@ -436,15 +436,16 @@ class MissingMethods:
 
     def missing_case_plot(self):
         """
-        Plots a histogram showing the distribution of missing values across cases.
+        Plots a bar plot showing the distribution of missing values across cases.
 
         Example:
             >>> df = pd.DataFrame({'A': [1, 2, np.nan], 'B': [4, np.nan, 6]})
             >>> df.missing.missing_case_plot()
         """
-        df = self._obj.missing.missing_case_summary()
+        df = self._obj.missing.missing_case_summary().value_counts("n_missing")
+        df = pd.DataFrame(df).reset_index()
 
-        sns.displot(data=df, x="n_missing", binwidth=1, color="black")
+        sns.barplot(data=df_test2, x="n_missing", y="count", color="black")
 
         plt.grid(axis="x")
         plt.xlabel("Number of missings in case")

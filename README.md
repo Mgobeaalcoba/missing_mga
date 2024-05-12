@@ -15,23 +15,22 @@ This class provides several methods for handling missing values in a DataFrame. 
 7. **impute_mode** Input a value in the missing values of the DataFrame using the mode of each column.
 8. **impute_knn(n_neighbors=5)** Input a value in the missing values of the DataFrame using the K-Nearest Neighbors algorithm.
 9. **missing_value_heatmap** Generates a heatmap showing the distribution of missing values in the DataFrame.
-10. **missing_value_pattern** Generates a pattern showing the distribution of missing values in the DataFrame.
-11. **drop_missing_rows(thresh=0.5)** Deletes the rows that contain missing values above the specified percentage.
-12. **drop_missing_columns(thresh=0.5)** Deletes the columns that contain missing values above the specified percentage.
-13. **missing_variable_summary**: Generates a summary table showing the count and percentage of missing values for each variable (column).
-14. **missing_case_summary**: Generates a summary table showing the count and percentage of missing values for each case (row).
-15. **missing_variable_table**: Generates a table showing the distribution of missing values across variables.
-16. **missing_case_table**: Generates a table showing the distribution of missing values across cases.
-17. **missing_variable_span**: Analyzes the missing values in a variable over a specified span and returns a DataFrame summarizing the percentage of missing and complete values.
-18. **missing_variable_run**: Identifies runs of missing and complete values in a specified variable and returns a DataFrame summarizing their lengths.
-19. **sort_variables_by_missingness**: Sorts the DataFrame columns based on the number of missing values in each column.
-20. **create_shadow_matrix**: Creates a shadow matrix indicating missing values with a specified string.
-21. **bind_shadow_matrix**: Binds the original DataFrame with its shadow matrix indicating missing values.
-22. **missing_scan_count**: Counts occurrences of specified values in the DataFrame and returns the counts per variable.
-23. **missing_variable_plot**: Plots a horizontal bar chart showing the number of missing values for each variable.
-24. **missing_case_plot**: Plots a histogram showing the distribution of missing values across cases.
-25. **missing_variable_span_plot**: Plots a stacked bar chart showing the percentage of missing and complete values over a repeating span for a specified variable.
-26. **missing_upsetplot**: Generates an UpSet plot to visualize the combinations of missing values across variables.
+10. **drop_missing_rows(thresh=0.5)** Deletes the rows that contain missing values above the specified percentage.
+11. **drop_missing_columns(thresh=0.5)** Deletes the columns that contain missing values above the specified percentage.
+12. **missing_variable_summary**: Generates a summary table showing the count and percentage of missing values for each variable (column).
+13. **missing_case_summary**: Generates a summary table showing the count and percentage of missing values for each case (row).
+14. **missing_variable_table**: Generates a table showing the distribution of missing values across variables.
+15. **missing_case_table**: Generates a table showing the distribution of missing values across cases.
+16. **missing_variable_span**: Analyzes the missing values in a variable over a specified span and returns a DataFrame summarizing the percentage of missing and complete values.
+17. **missing_variable_run**: Identifies runs of missing and complete values in a specified variable and returns a DataFrame summarizing their lengths.
+18. **sort_variables_by_missingness**: Sorts the DataFrame columns based on the number of missing values in each column.
+19. **create_shadow_matrix**: Creates a shadow matrix indicating missing values with a specified string.
+20. **bind_shadow_matrix**: Binds the original DataFrame with its shadow matrix indicating missing values.
+21. **missing_scan_count**: Counts occurrences of specified values in the DataFrame and returns the counts per variable.
+22. **missing_variable_plot**: Plots a horizontal bar chart showing the number of missing values for each variable.
+23. **missing_case_plot**: Plots a histogram showing the distribution of missing values across cases.
+24. **missing_variable_span_plot**: Plots a stacked bar chart showing the percentage of missing and complete values over a repeating span for a specified variable.
+25. **missing_upsetplot**: Generates an UpSet plot to visualize the combinations of missing values across variables.
 
 These methods provide comprehensive tools for analyzing and visualizing missing values in a DataFrame. They can be used to gain insights into the patterns and distribution of missing values, as well as to inform data cleaning and imputation strategies.
 

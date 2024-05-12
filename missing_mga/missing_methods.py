@@ -111,15 +111,6 @@ class MissingMethods:
         plt.title('Missing Values Heatmap')
         plt.show()
 
-    def missing_value_pattern(self):
-        """
-        Identifies patterns and correlations in missing values in the dataset.
-        Returns a DataFrame with information about missing value patterns.
-        """
-        missing_values = self._obj.isnull()
-        missing_patterns = missing_values.groupby((missing_values != missing_values.shift()).cumsum()).cumsum()
-        return missing_patterns
-
     # Filtering and Dropping Missing Values
     def drop_missing_rows(self, thresh=0.5):
         """
@@ -181,7 +172,7 @@ class MissingMethods:
             n_missing=lambda df: df.apply(
                 axis="columns", func=lambda row: row.isna().sum()
             ),
-            pct_missing=lambda df: df["n_missing"] / df.shape[1] * 100,
+            pct_missing=lambda df: (df["n_missing"] / (df.shape[1] - 2)) * 100,
         )[["case", "n_missing", "pct_missing"]]
 
     def missing_variable_table(self) -> pd.DataFrame:

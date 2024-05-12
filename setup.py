@@ -5,9 +5,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='missing_mga',
-    version='0.3.0',
+    version='0.4.0',
     packages=find_packages(),
-    install_requires=['pandas', 'numpy', 'matplotlib', 'seaborn', 'upsetplot'],
+    install_requires=['pandas', 'numpy', 'matplotlib', 'seaborn', 'upsetplot', 'scikit-learn'],
     author='Mariano Gobea Alcoba',
     author_email='gobeamariano@gmail.com',
     description='A package for handling missing values in datasets.',

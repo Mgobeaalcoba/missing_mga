@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import itertools
 import upsetplot
+from sklearn.impute import KNNImputer
+
 
 @pd.api.extensions.register_dataframe_accessor("missing")
 class MissingMethods:
@@ -69,6 +71,69 @@ class MissingMethods:
             dtype: int64
         """
         return self._obj.count()
+
+    def impute_mean(self):
+        """
+        Imputes missing values using the mean of each column.
+        Returns a new DataFrame with missing values imputed.
+        """
+        return self._obj.fillna(self._obj.mean())
+
+    def impute_median(self):
+        """
+        Imputes missing values using the median of each column.
+        Returns a new DataFrame with missing values imputed.
+        """
+        return self._obj.fillna(self._obj.median())
+
+    def impute_mode(self):
+        """
+        Imputes missing values using the mode of each column.
+        Returns a new DataFrame with missing values imputed.
+        """
+        return self._obj.fillna(self._obj.mode().iloc[0])
+
+    def impute_knn(self, n_neighbors=5):
+        """
+        Imputes missing values using KNN (K-Nearest Neighbors).
+        Returns a new DataFrame with missing values imputed.
+        """
+        imputer = KNNImputer(n_neighbors=n_neighbors)
+        return pd.DataFrame(imputer.fit_transform(self._obj), columns=self._obj.columns)
+
+    # Analysis and Visualization of Missing Values
+    def missing_value_heatmap(self):
+        """
+        Creates a heatmap to visualize the distribution of missing values in the dataset.
+        """
+        plt.figure(figsize=(10, 6))
+        sns.heatmap(self._obj.isnull(), cmap='viridis', cbar=False)
+        plt.title('Missing Values Heatmap')
+        plt.show()
+
+    def missing_value_pattern(self):
+        """
+        Identifies patterns and correlations in missing values in the dataset.
+        Returns a DataFrame with information about missing value patterns.
+        """
+        missing_values = self._obj.isnull()
+        missing_patterns = missing_values.groupby((missing_values != missing_values.shift()).cumsum()).cumsum()
+        return missing_patterns
+
+    # Filtering and Dropping Missing Values
+    def drop_missing_rows(self, thresh=0.5):
+        """
+        Drops rows containing missing values above the specified percentage.
+        Returns a new DataFrame with dropped rows.
+        """
+        return self._obj.dropna(thresh=int(thresh * len(self._obj.columns)))
+
+    def drop_missing_columns(self, thresh=0.5):
+        """
+        Drops columns containing missing values above the specified percentage.
+        Returns a new DataFrame with dropped columns.
+        """
+        return self._obj.dropna(axis=1, thresh=int(thresh * len(self._obj)))
 
     def missing_variable_summary(self) -> pd.DataFrame:
         """

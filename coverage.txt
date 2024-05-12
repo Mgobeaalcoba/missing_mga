@@ -1,0 +1,7 @@
+Name                             Stmts   Miss  Cover
+----------------------------------------------------
+missing_mga/__init__.py              1      0   100%
+missing_mga/missing_methods.py      87      0   100%
+tests/test_missing_methods.py       83      1    99%
+----------------------------------------------------
+TOTAL                              171      1    99%

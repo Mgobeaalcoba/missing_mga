@@ -445,7 +445,7 @@ class MissingMethods:
         df = self._obj.missing.missing_case_summary().value_counts("n_missing")
         df = pd.DataFrame(df).reset_index()
 
-        sns.barplot(data=df_test2, x="n_missing", y="count", color="black")
+        sns.barplot(data=df, x="n_missing", y="count", color="black")
 
         plt.grid(axis="x")
         plt.xlabel("Number of missings in case")

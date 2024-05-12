@@ -40,7 +40,7 @@ pip install missing-mga
 To use the package, you need to import the MissingMethods class from the pandas_missing module:
 
 ```python
-from missing-mga import MissingMethods
+import missing_mga as missing
 ```
 
 Then, you can create a DataFrame and use the missing method to access the missing value handling methods:

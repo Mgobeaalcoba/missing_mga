@@ -89,6 +89,10 @@ This package was inspired by the [naniar](https://naniar.njtierney.com/) package
 - [Handling Missing Data in Pandas](https://towardsdatascience.com/handling-missing-data-in-pandas-ba0b2ee0f4e4)
 - [Working with Missing Data in Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html)
 
+## Metrics
+
+You can find the metrics of this package in the following link: [Metrics](https://lookerstudio.google.com/s/m-3EH05N9W8)
+
 ## Contact
 
 If you have any questions or need further assistance, please contact the package maintainer: gobeamariano@gmail.com

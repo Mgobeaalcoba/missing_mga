@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='missing_mga',
-    version='1.1.1',
+    version='1.1.2',
     packages=find_packages(),
     install_requires=['pandas', 'numpy', 'matplotlib', 'seaborn', 'upsetplot', 'scikit-learn'],
     author='Mariano Gobea Alcoba',

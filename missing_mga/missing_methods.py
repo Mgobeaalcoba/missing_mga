@@ -10,7 +10,10 @@ from sklearn.impute import KNNImputer
 @pd.api.extensions.register_dataframe_accessor("missing")
 class MissingMethods:
     def __init__(self, pandas_obj):
-        self._obj = pandas_obj
+        if not isinstance(pandas_obj, pd.DataFrame):
+            raise TypeError("This package only works with pandas DataFrames.")
+        else:
+            self._obj = pandas_obj
 
     def number_missing(self):
         """
@@ -107,8 +110,8 @@ class MissingMethods:
         Creates a heatmap to visualize the distribution of missing values in the dataset.
         """
         plt.figure(figsize=(10, 6))
-        sns.heatmap(self._obj.isnull(), cmap='viridis', cbar=False)
-        plt.title('Missing Values Heatmap')
+        sns.heatmap(self._obj.isnull(), cmap="viridis", cbar=False)
+        plt.title("Missing Values Heatmap")
         plt.show()
 
     # Filtering and Dropping Missing Values
@@ -193,7 +196,9 @@ class MissingMethods:
             self._obj.missing.missing_variable_summary()
             .value_counts("n_missing")
             .reset_index()
-            .rename(columns={"n_missing": "n_missing_in_variable", "count": "n_variables"})
+            .rename(
+                columns={"n_missing": "n_missing_in_variable", "count": "n_variables"}
+            )
             .assign(
                 pct_variables=lambda df: df.n_variables / df.n_variables.sum() * 100
             )
@@ -305,20 +310,15 @@ class MissingMethods:
             1  2  NaN
             2  NaN 6.0
         """
-        return (
-            self._obj
-            .pipe(
-                lambda df: (
-                    df[df.isna().sum().sort_values(ascending=ascending).index]
-                )
-            )
+        return self._obj.pipe(
+            lambda df: (df[df.isna().sum().sort_values(ascending=ascending).index])
         )
 
     def create_shadow_matrix(
-            self,
-            true_string: str = "Missing",
-            false_string: str = "Not Missing",
-            only_missing: bool = False,
+        self,
+        true_string: str = "Missing",
+        false_string: str = "Not Missing",
+        only_missing: bool = False,
     ) -> pd.DataFrame:
         """
         Creates a shadow matrix indicating the presence of missing values.
@@ -340,18 +340,17 @@ class MissingMethods:
             2  False  True
         """
         return (
-            self._obj
-            .isna()
+            self._obj.isna()
             .pipe(lambda df: df[df.columns[df.any()]] if only_missing else df)
             .replace({False: false_string, True: true_string})
             .add_suffix("_NA")
         )
 
     def bind_shadow_matrix(
-            self,
-            true_string: str = "Missing",
-            false_string: str = "Not Missing",
-            only_missing: bool = False,
+        self,
+        true_string: str = "Missing",
+        false_string: str = "Not Missing",
+        only_missing: bool = False,
     ) -> pd.DataFrame:
         """
         Binds the original DataFrame with its corresponding shadow matrix.
@@ -378,10 +377,10 @@ class MissingMethods:
                 self._obj.missing.create_shadow_matrix(
                     true_string=true_string,
                     false_string=false_string,
-                    only_missing=only_missing
-                )
+                    only_missing=only_missing,
+                ),
             ],
-            axis="columns"
+            axis="columns",
         )
 
     def missing_scan_count(self, search) -> pd.DataFrame:
@@ -452,7 +451,7 @@ class MissingMethods:
         plt.ylabel("Number of cases")
 
     def missing_variable_span_plot(
-            self, variable: str, span_every: int, rot: int = 0, figsize=None
+        self, variable: str, span_every: int, rot: int = 0, figsize=None
     ):
         """
         Plots a bar chart showing the percentage of missing values over a repeating span for a specified variable.

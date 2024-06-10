@@ -8,12 +8,14 @@ import warnings
 class TestMissingMethods(unittest.TestCase):
     def setUp(self):
         # Crear un DataFrame de ejemplo para usar en los tests
-        self.df = pd.DataFrame({
-            'A': [1, 2, None, 4, 5],
-            'B': [None, 2, 3, 4, 5],
-            'C': [1, 2, None, None, 5],
-            'D': [1, 2, 3, 4, None],
-        })
+        self.df = pd.DataFrame(
+            {
+                "A": [1, 2, None, 4, 5],
+                "B": [None, 2, 3, 4, 5],
+                "C": [1, 2, None, None, 5],
+                "D": [1, 2, 3, 4, None],
+            }
+        )
         self.missing = missing(self.df)
 
         # Apagar las advertencias de FutureWarning
@@ -22,19 +24,23 @@ class TestMissingMethods(unittest.TestCase):
         # Apagar las advertencias de DeprecationWarning
         warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+    def test_init_with_non_dataframe(self):
+        with self.assertRaises(TypeError):
+            missing_obj = missing("invalid_param")
+
     # Tabular functions tests
 
     def test_number_missing(self):
         self.assertEqual(self.missing.number_missing(), 5)
 
     def test_number_missing_by_column(self):
-        self.assertEqual(self.missing.number_missing_by_column()['A'], 1)
+        self.assertEqual(self.missing.number_missing_by_column()["A"], 1)
 
     def test_number_complete(self):
         self.assertEqual(self.missing.number_complete(), 15)
 
     def test_number_complete_by_column(self):
-        self.assertEqual(self.missing.number_complete_by_column()['A'], 4)
+        self.assertEqual(self.missing.number_complete_by_column()["A"], 4)
 
     def test_impute_mean(self):
         df_imputed = self.missing.impute_mean()
@@ -80,11 +86,11 @@ class TestMissingMethods(unittest.TestCase):
         self.assertIsInstance(table, pd.DataFrame)
 
     def test_missing_variable_span(self):
-        span = self.missing.missing_variable_span(variable='A', span_every=2)
+        span = self.missing.missing_variable_span(variable="A", span_every=2)
         self.assertIsInstance(span, pd.DataFrame)
 
     def test_missing_variable_run(self):
-        run = self.missing.missing_variable_run(variable='A')
+        run = self.missing.missing_variable_run(variable="A")
         self.assertIsInstance(run, pd.DataFrame)
 
     def test_sort_variables_by_missingness(self):
@@ -112,10 +118,12 @@ class TestMissingMethods(unittest.TestCase):
         self.assertIsNone(self.missing.missing_case_plot())
 
     def test_missing_variable_span_plot(self):
-        self.assertIsNone(self.missing.missing_variable_span_plot(variable='A', span_every=2))
+        self.assertIsNone(
+            self.missing.missing_variable_span_plot(variable="A", span_every=2)
+        )
 
     def test_missing_upsetplot(self):
-        plot = self.missing.missing_upsetplot(variables=['A', 'B'])
+        plot = self.missing.missing_upsetplot(variables=["A", "B"])
         self.assertIsNotNone(plot)
 
     def test_missing_upsetplot_2(self):
@@ -123,5 +131,5 @@ class TestMissingMethods(unittest.TestCase):
         self.assertIsNotNone(plot)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
